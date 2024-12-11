@@ -1,0 +1,41 @@
+﻿@model Course3.Models.Cart
+
+<h2>Ваша корзина</h2>
+
+@if (Model.Items.Count == 0)
+{
+    <p>Ваша корзина пуста</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                <tr>
+                    <td>@item.ProductName</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity</td>
+                    <td>@(item.Price * item.Quantity)</td>
+                    <td>
+                        <form asp-controller="Cart" asp-action="RemoveFromCart" method="post">
+                            <input type="hidden" name="productId" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-controller="Products" asp-action="Index" asp-route-catalogId="@Model.CatalogId" class="btn btn-primary">Back to Products</a>
+    <a asp-controller="Order" asp-action="CreateOrderForm" class="btn btn-success">Create Order</a>
+}

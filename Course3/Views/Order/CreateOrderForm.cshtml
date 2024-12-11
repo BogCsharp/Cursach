@@ -1,0 +1,36 @@
+﻿@model Course3.Models.Order
+
+<h2>Create Order</h2>
+
+<form asp-controller="Order" asp-action="CreateOrderForm" method="post">
+    <div class="form-group">
+        <label asp-for="ClientName">ФИО</label>
+        <input asp-for="ClientName" class="form-control" />
+        <span asp-validation-for="ClientName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PassportNumber">Паспортные данные</label>
+        <input asp-for="PassportNumber" class="form-control" />
+        <span asp-validation-for="PassportNumber" class="text-danger"></span>
+
+    </div>
+    <div class="form-group">
+        <label asp-for="Address">Адрес доставки</label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Number">Номер телефона</label>
+        <input asp-for="Number" class="form-control" />
+        <span asp-validation-for="Number" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email">Email</label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+   </br>
+
+
+    <button type="submit" class="btn btn-primary">Submit Order Request</button>
+</form>

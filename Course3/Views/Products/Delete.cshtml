@@ -1,0 +1,17 @@
+﻿@model Course3.Models.Product
+
+<h2>Delete Product</h2>
+
+<div>
+    <h4>Delete Product?</h4>
+    <h4>@Model.Name</h4>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+</form>
+
+<a asp-action="Index">Back to Products</a>

@@ -1,0 +1,16 @@
+﻿@model Course3.Models.Order
+
+<h2>Удалить заказ</h2>
+
+<p>Вы уверены, что хотите удалить заказ с ID @Model.Id?</p>
+
+<form asp-controller="Order" asp-action="DeleteOrderConfirmed" method="post" onsubmit="return confirm('Вы уверены, что хотите удалить этот заказ?');">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </div>
+    <a asp-action="MyOrders">Отмена</a>
+</form>
+
+
+

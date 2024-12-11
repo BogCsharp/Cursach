@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Course3.Models.Product>
+
+<h2>Products</h2>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.buy-now-btn').click(function () {
+            var productId = $(this).data('product-id');
+            var productName = $(this).data('product-name');
+            var price = $(this).data('price');
+            var catalogId = $(this).data('catalog-id');
+            var quantityInput = $(this).closest('.card-body').find('input[name="quantity"]');
+            var quantity = quantityInput.val();
+
+            $.ajax({
+                url: '@Url.Action("AddToCart", "Cart")',
+                type: 'POST',
+                data: {
+                    productId: productId,
+                    productName: productName,
+                    price: price,
+                    catalogId: catalogId,
+                    quantity: quantity
+                },
+                success: function (response) {
+                    if (response.success) {
+                        toastr.success(response.message);
+                    } else {
+                        toastr.error('Произошла ошибка при добавлении товара в корзину');
+                    }
+                },
+                error: function () {
+                    toastr.error('Произошла ошибка при выполнении запроса');
+                }
+            });
+        });
+    });
+
+    toastr.options = {
+        "closeButton": false,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-right",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "5000",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    };
+</script>
+@if (User.IsInRole("Admin"))
+{
+    <a asp-action="Create" style="margin-inline:auto;margin:30px;width:200px;height:40px" class="btn btn-success">Create New</a>
+}
+<div class="row">
+    @if (Model != null && Model.Any())
+    {
+        foreach (var product in Model)
+        {
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm">
+                    <img src="@product.ImageUrl" class="card-img-top" alt="@product.Name" />
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Name</h5>
+                        <p class="card-text">@product.Material</p>
+                        <p class="card-text"><strong>@product.Price.ToString("C")</strong></p>
+                        <div class="form-group">
+                            <label for="quantity">Quantity:</label>
+                            <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control" />
+                        </div>
+                        <br />
+                        <button class="buy-now-btn btn btn-primary" data-product-id="@product.Id" data-product-name="@product.Name" data-price="@product.Price" data-catalog-id="@product.CatalogId">Buy Now</button>
+                        <br />
+                        <br />
+
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Edit" asp-route-id="@product.Id" class="btn btn-sm btn-primary">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@product.Id" class="btn btn-sm btn-danger">Delete</a>
+                        }
+                        <a asp-action="Details" asp-route-id="@product.Id" class="btn btn-sm btn-primary">Details</a>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="col-12">
+            <p>No products available in this catalog.</p>
+        </div>
+    }
+</div>
+
+<div class="text-center" style="margin: 30px;">
+    <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back to Home</a>
+</div>

@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Course3.Models.Catalog>;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mt-4">
+    <h2>Каталог товаров</h2>
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-action="Create" style="margin-inline:auto;margin:30px;width:200px;height:40px" class="btn btn-success">Create New</a>
+    }
+
+    <div class="row">
+        
+     
+        @if (Model != null && Model.Any())
+        {
+            foreach (var catalog in Model)
+            {
+                <div class="col-md-4">
+                    <div class="card mb-4 shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title">@catalog.Name</h5>
+                            <p class="card-text">@catalog.Description</p>
+                            <a href="@Url.Action("Index", "Products", new { catalogId = catalog.Id })" class="btn btn-primary">Товары</a>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a asp-action="EditCatalog" asp-route-id="@catalog.Id" class="btn btn-sm btn-primary">Edit</a>
+                                <a asp-action="DeleteCatalog" asp-route-id="@catalog.Id" class="btn btn-sm btn-danger">Delete</a>
+                            }
+                            
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="col-12">
+                <p>No catalogs available.</p>
+            </div>
+        }
+    </div>
+</div>
+

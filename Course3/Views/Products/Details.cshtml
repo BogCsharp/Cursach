@@ -1,0 +1,12 @@
+﻿@model Course3.Models.Product
+
+<h1>@Model.Name</h1>
+<p>Material: @Model.Material</p>
+<p>Quantity: @Model.Quantity</p>
+<p>Price: @Model.Price</p>
+<p>Weight: @Model.Weight</p>
+<p>Quantity: @Model.Quantity</p>
+<p>Factory: @Model.Factory</p>
+<p>Catalog: @Model.CatalogId</p>
+
+<a asp-action="Index" asp-route-catalogId="@Model.CatalogId">Back to Products</a>

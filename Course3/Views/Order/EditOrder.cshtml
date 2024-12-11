@@ -1,0 +1,39 @@
+﻿@model Course3.Models.Order
+
+<h2>Edit Order</h2>
+
+<form asp-action="EditOrder" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="form-group">
+        <label asp-for="ClientName" class="control-label"></label>
+        <input asp-for="ClientName" class="form-control" />
+        <span asp-validation-for="ClientName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="PassportNumber" class="control-label"></label>
+        <textarea asp-for="PassportNumber" class="form-control"></textarea>
+        <span asp-validation-for="PassportNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Address" class="control-label"></label>
+        <textarea asp-for="Address" class="form-control"></textarea>
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Number" class="control-label"></label>
+        <textarea asp-for="Number" class="form-control"></textarea>
+        <span asp-validation-for="Number" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <textarea asp-for="Email" class="form-control"></textarea>
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save</button>
+    </div>
+</form>
+
+<a asp-action="MyOrders">Back to Orders</a>
