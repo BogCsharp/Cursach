@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Course3.Models; // Замените на ваше пространство имен
+using Course3.Models; 
 using System.Threading.Tasks;
 using Course3.Data;
 
@@ -20,7 +20,7 @@ public class AccountController : Controller
         _signInManager = signInManager;
     }
 
-    // Регистрация
+   
     [HttpGet]
     public IActionResult Register()
     {
@@ -49,7 +49,7 @@ public class AccountController : Controller
         return View(model);
     }
 
-    // Авторизация
+    
     [HttpGet]
     public IActionResult Login() => View();
 
