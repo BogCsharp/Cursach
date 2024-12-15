@@ -28,7 +28,7 @@ namespace Course3.Controllers
 
         private List<Catalog> GetCatalog()
         {
-            // все каталоги из БД
+            
             return _db.Catalogs.ToList();
         }
         [Authorize(Roles = "Admin")]
@@ -111,7 +111,7 @@ namespace Course3.Controllers
             [Authorize(Roles = "Admin")]
         public IActionResult Privacy()
         {
-            // Получить все продукты по категориям
+            
             var products = _db.Products.ToList();
             return PartialView("Privacy", products);
         }
@@ -124,8 +124,8 @@ namespace Course3.Controllers
              [Authorize(Roles = "Admin")]
         public IActionResult AllOrders()
         {
-            var orders = _db.Orders.ToList(); // Получаем все заказы
-            return View(orders); // Возвращаем представление с заказами
+            var orders = _db.Orders.ToList(); 
+            return View(orders); 
         }
     }
 }
